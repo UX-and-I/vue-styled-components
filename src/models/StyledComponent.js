@@ -25,7 +25,7 @@ export default (ComponentStyle) => {
         ...combinedPropDefinition
       },
 
-      emits: ['input', 'update:modelValue'],
+      emits: ['input', 'update:modelValue', 'click'],
 
       setup (props, { slots, attrs, emit }) {
         const theme = inject('theme')
@@ -58,6 +58,9 @@ export default (ComponentStyle) => {
               onInput: (e) => {
                 emit('update:modelValue', e.target.value)
                 emit('input', e)
+              },
+              onClick: (e) => {
+                emit('click', e)
               }
             },
             slots
