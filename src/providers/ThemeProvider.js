@@ -1,11 +1,13 @@
-import { h, provide } from 'vue'
+import { h, provide, toRefs } from 'vue'
 
 export default {
   props: {
     theme: Object
   },
-  setup (props, { slots }) {
-    provide('theme', props.theme)
+  setup (props) {
+    const { theme } = toRefs(props)
+
+    provide('theme', theme)
   },
 
   render () {
