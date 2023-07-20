@@ -1,4 +1,4 @@
-import { h, inject } from 'vue'
+import { computed, h, inject } from 'vue'
 import css from '../constructors/css'
 import isVueComponent from '../utils/isVueComponent'
 import normalizeProps from '../utils/normalizeProps'
@@ -30,8 +30,10 @@ export default (ComponentStyle) => {
       setup (props, { slots, attrs, emit }) {
         const theme = inject('theme')
 
+        const finalTheme = computed(() => theme && theme.value ? theme.value : theme)
+
         return () => {
-          const styleClass = componentStyle.generateAndInjectStyles({ theme, ...props, ...attrs })
+          const styleClass = componentStyle.generateAndInjectStyles({ theme: finalTheme.value, ...props, ...attrs })
           const classes = [styleClass]
 
           if (attrs.class) {
